@@ -1,0 +1,158 @@
+/* global.css */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 64px); /* Adjust height considering AppBar */
+  }
+  
+  .grid-container {
+    height: 100%;
+  }
+  
+  .login-card-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-card {
+    width: 100%;
+  }
+  
+  .image-grid {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align the image to the extreme right */
+  }
+  
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end; /* Ensure image is aligned to the extreme right */
+  }
+  
+  .image {
+    max-width: 100%; /* Ensure image does not exceed container width */
+    max-height: 100%; /* Ensure image does not exceed container height */
+    object-fit: cover;
+  }
+  
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   /*background-color: rgba(255, 0, 0, 0.5); /* Reddish color with 50% opacity */
+   background-color: rgba(79, 130, 115, 0.8); /* Base color with opacity */
+  }
+  
+  .image-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+  
+  .login-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #74C6C0; /* Login form background color */
+    padding-top: 50px;
+  }
+  
+  .login-card-grid .login-card {
+    width: 100%;
+    max-width: 400px; /* Adjust max-width as needed */
+    /*background-color: #dce4e7;*/
+  }
+  
+  .header-class {
+    background-color: #e4ebe5;
+    color: #4f8273;
+    font-size: 18px;
+  }
+
+  .MuiDataGrid-overlayWrapper{
+    margin-bottom:40px;
+  }
+
+  .text-automated {
+    background-color: #dff0d8; /* Light green background for automated */
+    color: #3c763d; /* Dark green text for automated */
+    padding: 10px;
+    border-radius: 20px;
+  }
+  
+  .text-guided {
+   background-color:#b4c4de; /* Light red background for guided */
+   color: #1963d1; /* Dark red text for guided */
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed{
+    color:#12bf6a !important;
+  }
+
+  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
+    color:#12bf6a !important;
+  }
+
+  .inputText{
+    font-size: '10px';
+  }
+  .MuiListItem-root .MuiListItem-gutters .css-1nxmd3h-MuiListItem-root{
+    margin-left:'20px';
+    margin-right:'20px';
+  }
+
+  .recommendationText input{
+    font-size:14px !important;
+  }
+
+  .recommendationLabel{
+    font-size:14px !important;
+    font-weight: 600 !important;
+  }
+
+  .MuiDataGrid-footerContainer .MuiTablePagination-root{
+    display: none !important;
+  }
+
+  .logo{
+    width:400px;
+    height:40px;
+  }
+
+  .rimage{
+   margin-left: 8px;
+   margin-right: 8px;
+    vertical-align: middle;
+  }
