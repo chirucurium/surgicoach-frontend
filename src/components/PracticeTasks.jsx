@@ -30,7 +30,7 @@ const PracticeTasks = () => {
       const offer = await peerConnection.createOffer();
       await peerConnection.setLocalDescription(offer);
 
-      const response = await fetch('http://52.201.91.40:8000/offer', {
+      const response = await fetch('http://52.90.24.44:8000/offer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -62,13 +62,13 @@ const PracticeTasks = () => {
     }
 
     try {
-      await fetch('http://52.201.91.40:8000/stop', { method: 'POST' });
+      await fetch('http://52.90.24.44:8000/stop', { method: 'POST' });
     } catch (error) {
       console.error('Error stopping recording:', error);
     }
 
 
-    setVideoURL('https://www.w3schools.com/html/mov_bbb.mp4'); // Replace this with your actual static video URL
+    setVideoURL('https://curium-surgicoach.s3.amazonaws.com/recordings/peanut_processed.mp4?AWSAccessKeyId=AKIA5S2HI22XF2QUXNNU&Signature=Cy9YEkRjbm4RXdgHnwjNytlqv%2BI%3D&Expires=1729184145');
 
     setIsRecording(false);
   };
