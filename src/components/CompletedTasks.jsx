@@ -153,6 +153,9 @@ const CompletedTasks = () => {
                 <GetAppIcon />
               </IconButton>
             )}
+          <a href="https://curium-surgicoach.s3.amazonaws.com/recordings/peanut_processed.mp4?AWSAccessKeyId=AKIA5S2HI22XF2QUXNNU&Signature=Cy9YEkRjbm4RXdgHnwjNytlqv%2BI%3D&Expires=1729184145">
+            <img src="../src/assets/Ricon.png" width="20" height="20" className="rimage"></img>
+          </a>
             <IconButton aria-label="delete" onClick={() => handleDeleteClick(params.row.volume_id)}>
               <DeleteIcon />
             </IconButton>

@@ -49,6 +49,7 @@ const InProgressTasks = () => {
   const [volumes, setVolumes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  
   const [reviewOnly, setReviewOnly] = useState(true);
   const [pdfContent, setPdfContent] = useState(null);
   const [openPdfDialog, setOpenPdfDialog] = useState(false);
@@ -127,6 +128,7 @@ const InProgressTasks = () => {
     }
   };
 
+
   const columns = [
    /* { field: 'patient_id', headerName: 'Patient ID', flex: 1, minWidth: 150, headerClassName: 'header-class', headerStyle: { backgroundColor: customtheme.colors.primary, color: '#333' } },
     { field: 'study_id', headerName: 'Study ID', flex: 1, minWidth: 150, headerClassName: 'header-class', headerStyle: { backgroundColor: customtheme.colors.primary, color: '#333', fontSize: '18px' } },
@@ -151,7 +153,12 @@ const InProgressTasks = () => {
       <IconButton aria-label="edit" onClick={() => handleEdit(params.row)}>
         <EditNoteIcon />
       </IconButton>
-      <img src="../src/assets/Ricon.png" width="20" height="20" className="rimage"/>
+      
+      {/* <img src="../src/assets/Ricon.png" width="20" height="20" className="rimage" onClick={() => handleVideo()}/> */}
+      {/* <a href="https://curium-surgicoach.s3.amazonaws.com/recordings/peanut_processed.mp4?AWSAccessKeyId=AKIA5S2HI22XF2QUXNNU&Signature=Cy9YEkRjbm4RXdgHnwjNytlqv%2BI%3D&Expires=1729184145">
+        <img src="../src/assets/Ricon.png" width="20" height="20" className="rimage"></img>
+      </a> */}
+
       <IconButton aria-label="download">
         <GetAppIcon />
       </IconButton>
