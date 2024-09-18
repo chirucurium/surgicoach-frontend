@@ -182,7 +182,7 @@ const PracticeTasks = () => {
               >
                 <video
                   ref={videoRef}
-                  src={undefined}  // Use videoURL if available
+                  src={videoURL || undefined}  // Use videoURL if available
                   autoPlay={isRecording && !videoURL} // Only autoPlay when recording
                   controls={!!videoURL} // Show controls only for the static video
                   muted={isRecording} // Mute during recording
