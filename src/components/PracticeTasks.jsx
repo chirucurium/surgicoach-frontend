@@ -5,16 +5,27 @@ import { Videocam } from '@mui/icons-material';
 import Footer from './Footer';
 import Watermark from './Watermark';
 
+
 const PracticeTasks = () => {
   const [selectedTask, setSelectedTask] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [videoURL, setVideoURL] = useState(null);
   const videoRef = useRef(null);
   const [pc, setPc] = useState(null);
+  const [pcId, setPcId] = useState(null);
+  let peerConnection;
+  
 
   const handleTaskChange = (e) => {
     setSelectedTask(e.target.value);
   };
+
+  const configuration = {
+    iceServers: [
+        {urls: 'stun:stun.l.google.com:19302'}
+    ]
+};
+
 
   const startRecording = async () => {
     try {
@@ -24,24 +35,30 @@ const PracticeTasks = () => {
         videoRef.current.play();
       }
 
-      const peerConnection = new RTCPeerConnection();
+      peerConnection = new RTCPeerConnection(configuration);
       stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
 
       const offer = await peerConnection.createOffer();
       await peerConnection.setLocalDescription(offer);
 
-      const response = await fetch('http://52.90.24.44:8000/offer', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sdp: peerConnection.localDescription.sdp,
-          type: peerConnection.localDescription.type
-        })
-      });
+      const ws = new WebSocket('ws://surgaidemo.curium.life:8000/ws');
+      
+      ws.onopen = function() {
+          ws.send(JSON.stringify({
+              type: 'offer',
+              sdp: peerConnection.localDescription.sdp
+          }));
+      };
 
-
-      const answer = await response.json();
-      await peerConnection.setRemoteDescription(answer);
+      ws.onmessage = async function(event) {
+          const message = JSON.parse(event.data);
+          if (message.type === 'answer') {
+              const remoteDesc = new RTCSessionDescription(message);
+              await peerConnection.setRemoteDescription(remoteDesc);
+              setPcId(message.pc_id);
+              
+          }
+      };
 
       setPc(peerConnection);
       setIsRecording(true);
@@ -60,15 +77,22 @@ const PracticeTasks = () => {
 
       videoRef.current.srcObject = null;
     }
-
-    try {
-      await fetch('http://52.90.24.44:8000/stop', { method: 'POST' });
-    } catch (error) {
-      console.error('Error stopping recording:', error);
+    console.log(pcId)
+    if (pcId) {
+        try {
+            const response = await fetch(`http://surgaidemo.curium.life:8000/stop-recording/${pcId}`, { method: 'POST' });
+            const data = await response.json();
+            console.log(data.presigned_url)
+            setVideoURL(data.presigned_url);
+            // setVideoURL('https://curium-surgicoach.s3.amazonaws.com/recordings/peanut_processed.mp4?AWSAccessKeyId=AKIA5S2HI22XF2QUXNNU&Signature=Cy9YEkRjbm4RXdgHnwjNytlqv%2BI%3D&Expires=1729184145')
+            // playbackLink.innerHTML = `<a href="${data.presigned_url}" target="_blank">Click here to play your recorded video</a>`;
+        } catch (error) {
+            console.error('Error stopping recording:', error);
+        }
+        finally {
+          setPcId(null);
+        }
     }
-
-
-    setVideoURL('https://curium-surgicoach.s3.amazonaws.com/recordings/peanut_processed.mp4?AWSAccessKeyId=AKIA5S2HI22XF2QUXNNU&Signature=Cy9YEkRjbm4RXdgHnwjNytlqv%2BI%3D&Expires=1729184145');
 
     setIsRecording(false);
   };
